@@ -1,44 +1,58 @@
 {
   "$schema": "https://raw.githubusercontent.com/pewplay/pewplay/main/schema/game.schema.json",
   "title": "Train Puzzle",
-  "description": "Connect the tracks to guide the train safely to its destination.",
-  "about": "Train Puzzle is a browser game where you select a difficulty and rearrange the track tiles to guide the train to the finish.\n\nStart a round in your browser and use the controls below to play.",
-  "howToPlay": "Select a difficulty and rearrange the track tiles to guide the train to the finish.",
+  "description": "Swap track tiles to build a railway for a moving train before it runs out of rails in this free isometric puzzle you play in your browser.",
+  "about": "Train Puzzle is a race against your own locomotive. The train leaves its tunnel as soon as the level starts, rolling across a colorful isometric board of scrambled track pieces toward a goal on the far side. Your job is to lay a working route in front of it, tile by tile, before it reaches a gap.\n\nYou always hold one spare track piece. Click or tap any free tile to swap it with your spare, so every move changes the piece you hold next. Coral blocks cannot be moved, and once the train rolls over a tile it is locked in place. Steer it into a dead end and it is game over; bring it home and the level is complete.\n\nEvery round generates a fresh random layout, and the difficulty slider sets how fast the train moves, from a gentle crawl to a real test of quick thinking.",
+  "howToPlay": "Press Play and the train starts moving from its tunnel. Click or tap a track tile to swap it with your spare piece and build a connected route to the goal. If the train reaches a tile that does not continue its track, the game is over. When your route is complete, press Finished to send the train at full speed.",
   "controls": [
     {
-      "input": "Click / tap tiles",
-      "action": "Swap track pieces"
+      "input": "Click / Tap",
+      "action": "Swap a tile with your spare piece"
     },
     {
-      "input": "Play",
-      "action": "Begin a puzzle"
+      "input": "Difficulty slider",
+      "action": "Set the train speed"
+    },
+    {
+      "input": "Finished",
+      "action": "Speed the train to the goal"
     }
   ],
   "tips": [
-    "Use click / tap tiles to swap track pieces.",
-    "Try another round to practice the timing and strategy."
+    "Work on the tiles right in front of the train first, then extend the route toward the goal.",
+    "Before swapping, look at the spare piece you hold: it is the one that will land on the board.",
+    "A swap you don't need can still help, because it gives you the piece you actually want next.",
+    "Start with a low difficulty to learn the track shapes, then raise it for a faster train."
   ],
   "faq": [
     {
-      "question": "How do I play Train Puzzle?",
-      "answer": "Select a difficulty and rearrange the track tiles to guide the train to the finish."
+      "question": "Is Train Puzzle free to play?",
+      "answer": "Yes. Train Puzzle is completely free and runs in your browser, with no download or sign-up."
     },
     {
-      "question": "Can I play Train Puzzle in a browser?",
-      "answer": "Yes. Open the game page and play without installing an app."
+      "question": "Can I play on a phone or tablet?",
+      "answer": "Yes. Tap a tile to swap it; on touch screens your spare piece is shown in the bottom-left corner. The board is small on phones, so a tablet or landscape view is more comfortable."
+    },
+    {
+      "question": "How do I change the difficulty?",
+      "answer": "Use the difficulty slider on the start ticket before pressing Play: higher values make the train move faster, leaving you less time to build the track."
     }
   ],
   "category": "Puzzle",
   "tags": [
     "train",
-    "puzzle",
-    "tracks",
-    "logic",
-    "brain"
+    "railway",
+    "tile swap",
+    "isometric",
+    "logic"
   ],
+  "author": "PewPlay",
   "playMode": "SinglePlayer",
   "orientation": "any",
   "cover": "cover.png",
-  "draft": true,
-  "author": "PewPlay"
+  "screenshots": [
+    "screenshots/1.png",
+    "screenshots/2.png",
+    "screenshots/3.png"
+  ]
 }
