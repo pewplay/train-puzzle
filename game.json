@@ -2,6 +2,32 @@
   "$schema": "https://raw.githubusercontent.com/pewplay/pewplay/main/schema/game.schema.json",
   "title": "Train Puzzle",
   "description": "Connect the tracks to guide the train safely to its destination.",
+  "about": "Train Puzzle is a browser game where you select a difficulty and rearrange the track tiles to guide the train to the finish.\n\nStart a round in your browser and use the controls below to play.",
+  "howToPlay": "Select a difficulty and rearrange the track tiles to guide the train to the finish.",
+  "controls": [
+    {
+      "input": "Click / tap tiles",
+      "action": "Swap track pieces"
+    },
+    {
+      "input": "Play",
+      "action": "Begin a puzzle"
+    }
+  ],
+  "tips": [
+    "Use click / tap tiles to swap track pieces.",
+    "Try another round to practice the timing and strategy."
+  ],
+  "faq": [
+    {
+      "question": "How do I play Train Puzzle?",
+      "answer": "Select a difficulty and rearrange the track tiles to guide the train to the finish."
+    },
+    {
+      "question": "Can I play Train Puzzle in a browser?",
+      "answer": "Yes. Open the game page and play without installing an app."
+    }
+  ],
   "category": "Puzzle",
   "tags": [
     "train",
@@ -10,6 +36,9 @@
     "logic",
     "brain"
   ],
-  "author": "PewPlay",
-  "playMode": "SinglePlayer"
+  "playMode": "SinglePlayer",
+  "orientation": "any",
+  "cover": "cover.png",
+  "draft": true,
+  "author": "PewPlay"
 }
