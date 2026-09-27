@@ -23,7 +23,9 @@ body {
   top: 5%;
 }
 .canvas-container canvas {
+  display: block;
   height: 100%;
+  margin: 0 auto;
 }
 
 .modal {

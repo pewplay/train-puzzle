@@ -1046,7 +1046,7 @@ class Tile {
   }
 }
 
-class Map {
+class GameMap {
   constructor(level) {
     this.map = level.level;
     this.startPos = level.start;
@@ -1338,7 +1338,7 @@ const playLevel = (autoplay, paused) => {
 
   state.paused = paused;
   state.autoplay = autoplay;
-  state.map = new Map(levelFactory.newLevel(diffSlider.value, false));
+  state.map = new GameMap(levelFactory.newLevel(diffSlider.value, false));
 
   if(!autoplay) {
     state.map.scramble();
@@ -1449,7 +1449,7 @@ const init = (sprites) => {
   
   state.canvas = document.getElementsByTagName('canvas')[0];
   state.ctx = state.canvas.getContext('2d');
-  state.map = new Map(levelFactory.newLevel(20, false));
+  state.map = new GameMap(levelFactory.newLevel(20, false));
 
   if(!state.isTouchDevice) {
     document.addEventListener("mousemove", setMousePos, false);
@@ -1477,6 +1477,10 @@ const swapTiles = event => {
       }
     } else {
       let t = state.hoveredTile;
+
+      if(!t) {
+        return;
+      }
 
       state.map.tileArr[t.y][t.x] = new Tile(t.x, t.y, state.map.spare);
       state.map.spare = state.hoveredTile.type;
