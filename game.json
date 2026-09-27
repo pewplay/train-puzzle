@@ -1,8 +1,15 @@
 {
+  "$schema": "https://raw.githubusercontent.com/pewplay/pewplay/main/schema/game.schema.json",
   "title": "Train Puzzle",
   "description": "Connect the tracks to guide the train safely to its destination.",
-  "keywords": ["train", "puzzle", "tracks", "logic", "brain"],
   "category": "Puzzle",
+  "tags": [
+    "train",
+    "puzzle",
+    "tracks",
+    "logic",
+    "brain"
+  ],
   "author": "PewPlay",
   "playMode": "SinglePlayer"
 }
