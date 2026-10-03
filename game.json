@@ -2,27 +2,40 @@
   "$schema": "https://raw.githubusercontent.com/pewplay/pewplay/main/schema/game.schema.json",
   "title": "Train Puzzle",
   "description": "Swap track tiles to build a railway for a moving train before it runs out of rails in this free isometric puzzle you play in your browser.",
-  "about": "Train Puzzle is a race against your own locomotive. The train leaves its tunnel as soon as the level starts, rolling across a colorful isometric board of scrambled track pieces toward a goal on the far side. Your job is to lay a working route in front of it, tile by tile, before it reaches a gap.\n\nYou always hold one spare track piece. Click or tap any free tile to swap it with your spare, so every move changes the piece you hold next. Coral blocks cannot be moved, and once the train rolls over a tile it is locked in place. Steer it into a dead end and it is game over; bring it home and the level is complete.\n\nEvery round generates a fresh random layout, and the difficulty slider sets how fast the train moves, from a gentle crawl to a real test of quick thinking.",
-  "howToPlay": "Press Play and the train starts moving from its tunnel. Click or tap a track tile to swap it with your spare piece and build a connected route to the goal. If the train reaches a tile that does not continue its track, the game is over. When your route is complete, press Finished to send the train at full speed.",
+  "about": "Train Puzzle is a race against your own locomotive. The train leaves its tunnel as soon as the level starts, rolling across a colorful isometric board of scrambled track pieces toward a goal on the far side. Your job is to lay a working route in front of it, tile by tile, before it reaches a gap.\n\nYou always hold one spare track piece. Tap or click any free tile to swap it with your spare, or drag the spare piece straight onto the board, so every move changes the piece you hold next. Coral blocks cannot be moved, and once the train rolls over a tile it is locked in place. Steer it into a dead end and it derails; bring it home and the level is complete.\n\nEvery level generates a fresh random layout and the train gets a little faster each time. Your level is saved in your browser, so you can come back later and carry on, and the difficulty slider sets the base speed, from a gentle crawl to a real test of quick thinking.",
+  "howToPlay": "Press Play and the train starts moving from its tunnel. Tap or click a track tile to swap it with your spare piece, or drag the spare piece onto a tile, and build a connected route to the goal. If the train reaches a tile that does not continue its track, it derails and you can try the level again. When your route is complete, press Finished to send the train at full speed and move on to the next level.",
   "controls": [
     {
-      "input": "Click / Tap",
-      "action": "Swap a tile with your spare piece"
+      "input": "Click / Tap a tile",
+      "action": "Swap the tile with your spare piece"
+    },
+    {
+      "input": "Drag the spare piece",
+      "action": "Drop it onto the tile you want to replace"
+    },
+    {
+      "input": "Mouse hover",
+      "action": "Preview where the spare piece will go"
+    },
+    {
+      "input": "Finished button / F",
+      "action": "Speed the train to the goal"
+    },
+    {
+      "input": "Pause button / Esc / P",
+      "action": "Pause or resume the game"
     },
     {
       "input": "Difficulty slider",
-      "action": "Set the train speed"
-    },
-    {
-      "input": "Finished",
-      "action": "Speed the train to the goal"
+      "action": "Set the base train speed"
     }
   ],
   "tips": [
     "Work on the tiles right in front of the train first, then extend the route toward the goal.",
     "Before swapping, look at the spare piece you hold: it is the one that will land on the board.",
     "A swap you don't need can still help, because it gives you the piece you actually want next.",
-    "Start with a low difficulty to learn the track shapes, then raise it for a faster train."
+    "Each level is a little faster than the last, so a low difficulty gives you more room to climb.",
+    "Press Finished only when the whole route is connected: the train speeds up and cannot be slowed down again."
   ],
   "faq": [
     {
@@ -31,7 +44,11 @@
     },
     {
       "question": "Can I play on a phone or tablet?",
-      "answer": "Yes. Tap a tile to swap it; on touch screens your spare piece is shown in the bottom-left corner. The board is small on phones, so a tablet or landscape view is more comfortable."
+      "answer": "Yes. Tap a tile to swap it, or drag the spare piece onto the board. The board resizes to fill the screen in both portrait and landscape, with the spare piece and buttons beside or below it."
+    },
+    {
+      "question": "Is my progress saved?",
+      "answer": "Yes. Your current level, best level and difficulty are saved in your browser. Press Continue to pick up where you left off, or Start again from level 1."
     },
     {
       "question": "How do I change the difficulty?",

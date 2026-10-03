@@ -1,202 +1,318 @@
+:root {
+  --bg: #252021;
+  --teal: #01aead;
+  --teal-dark: #019897;
+  --coral: #f38073;
+  --paper: #f4ecdf;
+  --paper-dark: #e4d9c7;
+  --ink: #252021;
+  --font: "Coustard", Rockwell, "Roboto Slab", "Courier New", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+
+html,
 body {
   margin: 0;
-  background-color: #252021;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-  overflow: hidden;
-}
-
-.canvas-container {
-  position: relative;
-  width: 100vmin;
-  height: 100vmin;
-  display: block;
-  text-align: center;
-  margin: 0 auto;
-}
-.canvas-container a {
-  display: none;
-  position: absolute;
-  right: 5%;
-  top: 5%;
-}
-.canvas-container canvas {
-  display: block;
+  padding: 0;
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: var(--font);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
 }
 
-.modal {
-  position: absolute;
-  width: 130px;
-  height: 183px;
-  font-size: 14px;
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/21151/ticket.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  color: #019897;
+#board {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/* ---------- side / bottom panel ---------- */
+.panel {
+  position: fixed;
+  display: none;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--paper);
+  touch-action: none;
+  overflow: hidden;
+  z-index: 2;
+  transition: left .25s ease, top .25s ease;
+}
+
+.game--hud .panel { display: grid; }
+
+.lay-side .panel {
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+}
+
+.lay-bottom .panel {
+  grid-template-columns: 1fr minmax(120px, 42%);
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "spare level" "spare buttons";
+}
+
+.lay-bottom .spare { grid-area: spare; }
+.lay-bottom .panel__level { grid-area: level; }
+.lay-bottom .panel__buttons { grid-area: buttons; align-self: end; }
+
+.panel__level {
+  font-size: 22px;
+  color: var(--coral);
   text-align: center;
+  line-height: 1.1;
+}
+
+.panel__hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: rgba(244, 236, 223, .6);
+}
+
+.lay-side .panel__hint { display: none; }
+@media (min-height: 560px) { .lay-side .panel__hint { display: block; } }
+@media (max-height: 700px) { .lay-bottom .panel__hint { display: none; } }
+.lay-bottom .panel__hint { font-size: 12px; margin-top: 6px; }
+
+.panel__label {
+  font-size: 15px;
+  color: var(--paper-dark);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.spare {
+  position: relative;
+  min-height: 0;
+  border-radius: 10px;
+  background: rgba(1, 174, 173, 0.10);
+  border: 2px dashed rgba(1, 174, 173, 0.55);
+  cursor: grab;
+  touch-action: none;
+}
+
+.spare:active { cursor: grabbing; }
+
+.spare canvas {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 6px;
+  bottom: 26px;
+  width: calc(100% - 12px);
+  height: calc(100% - 32px);
+}
+
+.spare__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--paper-dark);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  pointer-events: none;
+}
+
+.panel__buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.panel__buttons .btn--primary { flex: 1; min-width: 0; padding: 0 10px; }
+
+/* ---------- buttons ---------- */
+.btn {
+  font-family: var(--font);
+  font-size: 17px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--paper-dark);
+  color: var(--ink);
+  cursor: pointer;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover { background: #d3c6b0; }
+.btn:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+.btn--primary { background: var(--coral); color: #fff; }
+.btn--primary:hover { background: #e86f61; }
+
+.btn--icon { padding: 0; width: 44px; }
+.btn--icon svg { fill: var(--ink); }
+
+.btn--link {
+  background: transparent;
+  color: var(--teal-dark);
+  font-size: 15px;
+  text-decoration: underline;
+  padding: 0 6px;
+}
+.btn--link:hover { background: transparent; color: var(--coral); }
+.btn[hidden] { display: none; }
+
+/* ---------- ticket modal ---------- */
+.modal {
+  position: fixed;
   left: 50%;
   top: 50%;
-  font-family: "Coustard", serif;
-  transform: translateX(-50%) translateY(-50%);
-  padding: 20px;
-  transition: 0.2s all;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: min(340px, calc(100vw - 32px));
+  max-height: calc(100% - 24px);
+  transition: opacity .2s, transform .2s;
+  filter: drop-shadow(0 16px 30px rgba(0, 0, 0, .5));
 }
 
-.modal__gameover,
-.modal__win {
-  display: none;
-}
-.modal__gameover .modal__title,
-.modal__win .modal__title {
-  padding: 40px 0 25px;
-}
-
-.modal__loading {
-  display: none;
-}
-
-.game--active .canvas-container a {
-  display: block;
-}
 .game--active .modal {
   pointer-events: none;
   opacity: 0;
-  transform: translateX(-50%) translateY(0);
+  transform: translate(-50%, -40%);
 }
 
-.game--over .modal__gameover {
-  display: block;
-}
-.game--over .modal__main,
-.game--over .modal__win {
+.ticket {
   display: none;
+  position: relative;
+  padding: 26px 24px 22px;
+  text-align: center;
+  color: var(--teal-dark);
+  border-radius: 10px;
+  background: var(--paper);
+  -webkit-mask: radial-gradient(circle at 0 62%, transparent 13px, #000 14px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 62%, transparent 13px, #000 14px) right / 51% 100% no-repeat;
+  mask: radial-gradient(circle at 0 62%, transparent 13px, #000 14px) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 62%, transparent 13px, #000 14px) right / 51% 100% no-repeat;
 }
 
-.game--win .modal__win {
-  display: block;
-}
-.game--win .modal__gameover,
-.game--win .modal__main {
-  display: none;
-}
-
-.game--loading .modal__main {
-  display: none;
-}
-.game--loading .modal__loading {
-  display: block;
+.ticket::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 10px;
+  border-top: 2px dashed rgba(1, 152, 151, .35);
 }
 
-.modal__title {
-  padding: 10px 0 17px;
-  margin: 0;
-  color: #f38073;
+.ticket__title {
+  margin: 4px 0 10px;
+  font-size: 30px;
   line-height: 1.1;
   font-weight: normal;
+  color: var(--coral);
+  text-transform: uppercase;
+  letter-spacing: .03em;
 }
 
-.modal__text {
-  margin: 2.5em 0;
+.ticket__text {
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 1.35;
 }
 
-.modal__controls {
+.ticket__meta {
+  margin: 0 0 12px;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.ticket__slider {
+  display: block;
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: var(--teal-dark);
+}
+
+.ticket__slider span { display: block; margin-bottom: 4px; }
+
+.ticket__controls {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: center;
-  margin: 17px 0 10px;
+  margin-top: 14px;
 }
 
-.btn {
-  font-family: "Coustard", serif;
-  display: inline-block;
-  line-height: 40px;
-  background-color: #d8d1c6;
-  padding: 0 20px;
-  color: #252021;
-  cursor: pointer;
-  text-transform: none;
-}
-.btn:hover {
-  background-color: #c3b9a8;
-}
+.game--loading .modal__loading,
+.game--menu .modal__main,
+.game--paused .modal__paused,
+.game--over .modal__gameover,
+.game--win .modal__win { display: block; }
 
+/* ---------- slider ---------- */
 input[type=range] {
   -webkit-appearance: none;
-  background-color: transparent;
+  appearance: none;
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  background: transparent;
+  touch-action: none;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-  width: 129px;
-  height: 6px;
-  background-color: #01aead;
-  border: none;
-  border-radius: 3px;
+  height: 8px;
+  background: var(--teal);
+  border-radius: 4px;
 }
 
 input[type=range]::-moz-range-track {
-  width: 129px;
-  height: 6px;
-  background-color: #01aead;
-  border: none;
-  border-radius: 3px;
-}
-
-input[type=range]::-ms-track {
-  width: 129px;
-  height: 6px;
-  background-color: #01aead;
-  border: none;
-  border-radius: 3px;
-  margin: 5px 0;
+  height: 8px;
+  background: var(--teal);
+  border-radius: 4px;
 }
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  border: none;
-  height: 16px;
-  width: 16px;
+  height: 28px;
+  width: 28px;
   border-radius: 50%;
-  background-color: #f38073;
-  margin-top: -5px;
+  border: 3px solid var(--paper);
+  background: var(--coral);
+  margin-top: -10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
 }
 
 input[type=range]::-moz-range-thumb {
-  -webkit-appearance: none;
-  border: none;
-  height: 16px;
-  width: 16px;
+  height: 22px;
+  width: 22px;
   border-radius: 50%;
-  background-color: #f38073;
-  margin-top: -5px;
+  border: 3px solid var(--paper);
+  background: var(--coral);
 }
 
-input[type=range]::-ms-thumb {
-  margin-top: 0;
-}
+input[type=range]:focus { outline: none; }
+input[type=range]:focus-visible::-webkit-slider-runnable-track { background: var(--teal-dark); }
 
-/*input[type=range]::-ms-fill-lower {
-  background: #2a6495;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-}
-input[type=range]::-ms-fill-upper {
-  background: #3071a9;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-}*/
-input[type=range]:focus {
-  outline: none;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background-color: #016565;
-}
-
-input[type=range]:focus::-moz-range-track {
-  background-color: #016565;
+@media (max-height: 430px) {
+  .ticket { padding: 18px 20px 14px; }
+  .ticket__title { font-size: 24px; margin-bottom: 6px; }
+  .ticket__text { font-size: 15px; margin-bottom: 6px; }
+  .ticket__meta { margin-bottom: 4px; }
+  .ticket__controls { margin-top: 6px; }
+  .panel__level { font-size: 19px; }
 }
